@@ -7,25 +7,27 @@ function Navbar() {
 
     return (
         <Fragment>
-            <nav>
-                <ul>
-                    <li title='Dashboard'>
-                        <Link to={'/'}>
-                            Dashboard
-                        </Link>
-                    </li>
-                    <li title='Courses'>
-                        <Link to={'/courses'}>
-                            Courses
-                        </Link>
-                    </li>
-                    <li title='New Course'>
-                        <Link to={'/new-course'}>
-                            New Course
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
+            <header className="navbar">
+                <nav>
+                    <ul>
+                        <li title='Dashboard'>
+                            <Link to={'/'}>
+                                Dashboard
+                            </Link>
+                        </li>
+                        <li title='Courses'>
+                            <Link to={'/courses'}>
+                                Courses
+                            </Link>
+                        </li>
+                        <li title='New Course'>
+                            <Link to={'/new-course'}>
+                                New Course
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
         </Fragment>
     )
 }

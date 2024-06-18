@@ -5,3 +5,89 @@
   list-style-type: none;
   text-decoration: none;
 }
+
+/* Navbar.css */
+
+/* Style the nav element */
+.navbar nav {
+  background-color: #333;
+  padding: 10px 0;
+}
+
+/* Style the ul element inside nav */
+.navbar nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+/* Style the li elements inside ul */
+.navbar nav ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+/* Remove margin-right for the last li element */
+.navbar nav ul li:last-child {
+  margin-right: 0;
+}
+
+/* Style the Link components inside li */
+.navbar nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: inline-block;
+}
+
+/* Hover effect for the Link components */
+.navbar nav ul li a:hover {
+  background-color: #555;
+}
+
+
+/* Newcourse.css */
+
+/* Style the page container */
+.new_course_page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Style form groups */
+.new_course_page .form_group {
+  margin-bottom: 15px;
+}
+
+/* Style labels */
+.new_course_page label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Style inputs */
+.new_course_page input[type="number"],
+.new_course_page input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style submit button */
+.new_course_page input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.new_course_page input[type="submit"]:hover {
+  background-color: #0056b3;
+}
