@@ -15,12 +15,12 @@ function App() {
     WindowEthereum: false,
     ContractAddress: "0xaAE04Cd5c6ed58B1448C359F78f6AF9A3A117812",
     WalletAddress: null,
-    Balance: 0,
     ContractAbi: ABI.abi,
     Provider: null,
     Signer: null,
     ReadContract: null,
     WriteContract: null,
+    isAdmin: false
   };
   const [State, setState] = useState(initialState);
   const [navState, setNavState] = useState(navInitialState);
@@ -66,12 +66,10 @@ function App() {
         WriteContract
       }));
 
-      const accBalance = await ReadContract.accountBalance({ from: WalletAddress });
-      const accBalanceEth = ethers.utils.formatEther(accBalance);
-
+      const isAdmin = await ReadContract.checkAdmin({ from: WalletAddress });
       setState(prevState => ({
         ...prevState,
-        Balance: accBalanceEth,
+        isAdmin
       }));
     } else {
       console.log("Metamask Not Found");
