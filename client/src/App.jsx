@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { ethers } from "ethers";
 import ABI from "./contractJson/elearn.json";
 import appContext from './context/appContext'
+import Router from './router/Router'
 
 function App() {
   const navInitialState = {
@@ -88,7 +89,7 @@ function App() {
   return (
     <Fragment>
       <appContext.Provider value={context}>
-        <h1>{State.WalletAddress}</h1>
+        <Router />
       </appContext.Provider>
     </Fragment>
   )
