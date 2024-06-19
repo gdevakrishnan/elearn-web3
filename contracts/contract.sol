@@ -77,7 +77,7 @@ contract Contract {
         return (usersRecord[msg.sender].userName,usersRecord[msg.sender].score);
     }
    
-     mapping(address => mapping(uint256 => bool)) public userCourses;
+    mapping(address => mapping(uint256 => bool)) public userCourses;
 
     // Add the function to mark a course as purchased for a user
     function addPurchasedCourse(uint256 courseId) public {

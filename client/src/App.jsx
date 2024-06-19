@@ -20,7 +20,9 @@ function App() {
     Signer: null,
     ReadContract: null,
     WriteContract: null,
-    isAdmin: false
+    isAdmin: false,
+    isLogin: false,
+    userName: null
   };
   const [State, setState] = useState(initialState);
   const [navState, setNavState] = useState(navInitialState);
@@ -71,6 +73,18 @@ function App() {
         ...prevState,
         isAdmin
       }));
+
+      const isLogin = await ReadContract.Login({ from: WalletAddress })
+      setState(prevState => ({
+        ...prevState,
+        isLogin
+      }));
+      const user = await ReadContract.displayUserProfile({ from: WalletAddress })
+      setState(prevState => ({
+        ...prevState,
+        userName: user[0]
+      }));
+
     } else {
       console.log("Metamask Not Found");
     }

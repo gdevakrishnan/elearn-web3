@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom'
 import appContext from '../context/appContext'
 
 function Navbar() {
-    const { navState } = useContext(appContext);
+    const {
+        getStateParameters,
+        State
+    } = useContext(appContext);
+    const {
+        WalletAddress
+    } = State;
 
     return (
         <Fragment>
@@ -25,6 +31,18 @@ function Navbar() {
                                 New Course
                             </Link>
                         </li>
+                        {(WalletAddress) ?
+                            (<li title={WalletAddress}>
+                                <Link>
+                                    {WalletAddress.slice(0, 6)}...
+                                </Link>
+                            </li>) :
+                        (<li title='New Course'>
+                            <button onClick={(e) => {
+                                e.preventDefault();
+                                getStateParameters();
+                            }}>Connect</button>
+                        </li>)}
                     </ul>
                 </nav>
             </header>

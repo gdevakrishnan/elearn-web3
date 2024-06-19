@@ -1,3 +1,4 @@
+/* Reset default styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,15 +7,12 @@
   text-decoration: none;
 }
 
-/* Navbar.css */
-
-/* Style the nav element */
+/* Navbar Styles */
 .navbar nav {
   background-color: #333;
   padding: 10px 0;
 }
 
-/* Style the ul element inside nav */
 .navbar nav ul {
   list-style-type: none;
   padding: 0;
@@ -22,18 +20,15 @@
   text-align: center;
 }
 
-/* Style the li elements inside ul */
 .navbar nav ul li {
   display: inline-block;
   margin-right: 20px;
 }
 
-/* Remove margin-right for the last li element */
 .navbar nav ul li:last-child {
   margin-right: 0;
 }
 
-/* Style the Link components inside li */
 .navbar nav ul li a {
   color: #fff;
   text-decoration: none;
@@ -41,34 +36,27 @@
   display: inline-block;
 }
 
-/* Hover effect for the Link components */
 .navbar nav ul li a:hover {
   background-color: #555;
 }
 
-
-/* Newcourse.css */
-
-/* Style the page container */
+/* New Course Page Styles */
 .new_course_page {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Style form groups */
 .new_course_page .form_group {
   margin-bottom: 15px;
 }
 
-/* Style labels */
 .new_course_page label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-/* Style inputs */
 .new_course_page input[type="number"],
 .new_course_page input[type="text"] {
   width: 100%;
@@ -78,7 +66,6 @@
   border-radius: 4px;
 }
 
-/* Style submit button */
 .new_course_page input[type="submit"] {
   padding: 10px 20px;
   background-color: #007bff;
@@ -90,4 +77,69 @@
 
 .new_course_page input[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+/* Generic Page Styles */
+.dashboard_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  height: 100vh;
+  text-align: center;
+}
+
+.dashboard_page .login_btn {
+  padding: 8px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 10px;
+}
+
+.dashboard_page .welcome_card {
+  font-size: 1.1rem;
+  padding: 8px 20px;
+  border-radius: 5px;
+  background-color: #d3d1d1;
+  margin: 10px;
+}
+
+.dashboard_page .login_btn:hover {
+  background-color: #0056b3;
+}
+
+.login {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  max-width: 300px;
+  width: 100%;
+}
+
+.login input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.login input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.login input[type="submit"]:hover {
+  background-color: #45a049;
 }
