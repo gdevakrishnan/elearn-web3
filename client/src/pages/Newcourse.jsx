@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
+import appContext from '../context/appContext';
 
 function Newcourse() {
   const initialState = {
@@ -12,18 +13,29 @@ function Newcourse() {
 
   const quizInitialState = {
     "question": "",
-    "option_a": "",
-    "option_b": "",
-    "option_c": "",
-    "option_d": "",
-    "answer": "",
+    "choiceA": "",
+    "choiceB": "",
+    "choiceC": "",
+    "choiceD": "",
+    "correctAns": "",
   }
+
+  const {
+    State
+  } = useContext(appContext);
+
+  const {
+    WalletAddress,
+    WriteContract
+  } = State;
 
   const [newCourse, setNewCourse] = useState(initialState);
   const [newQuiz, setNewQuiz] = useState(quizInitialState);
+  const [noOfQuiz, setNoOfQuiz] = useState(0)
+  const [quiz, setQuiz] = useState([]);
   const [flag, setFlag] = useState(false);
 
-  const handleNewCourseSubmit = (e) => {
+  const handleNewCourseSubmit = async (e) => {
     e.preventDefault();
     for (const key in newCourse) {
       if (newCourse[key] === '' || newCourse[key] === 0) {
@@ -35,7 +47,7 @@ function Newcourse() {
     setFlag(true);
   }
 
-  const handleQuizSubmit = (e) => {
+  const handleAQuiz = (e) => {
     e.preventDefault();
     for (const key in newQuiz) {
       if (newQuiz[key] === '') {
@@ -44,13 +56,52 @@ function Newcourse() {
       }
     }
 
-    console.log(newQuiz);
+    setQuiz([...quiz, newQuiz]);
+    setNewQuiz(quizInitialState);
+    setNoOfQuiz(noOfQuiz + 1);
   }
+
+  const handleFinalSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Call quizCreate transaction
+      const tx1 = await WriteContract.getCourse(
+        newCourse.id,
+        newCourse.imgsrc,
+        newCourse.title,
+        newCourse.descrip,
+        newCourse.videourl,
+        newCourse.price,
+        { from: WalletAddress }
+      );
+      await tx1.wait();
+
+      const tx2 = await WriteContract.quizCreate(
+        newCourse.id,
+        noOfQuiz,
+        quiz,
+        {from: WalletAddress}
+      );
+      await tx2.wait();
+
+      // Success message
+      alert("Course and quiz list added successfully");
+      setNewCourse(initialState);
+
+    } catch (error) {
+      // Error handling
+      console.error("Error submitting transaction:", error);
+      alert("Error submitting transaction. Please try again.");
+    }
+  }
+
 
   return (
     <Fragment>
       <section className="page new_course_page">
-        <form>
+        {/* Course Details Form */}
+        <form className='form courseForm' onSubmit={(e) => handleNewCourseSubmit(e)}>
           <div className="form_group">
             <label htmlFor="id">Id</label>
             <input
@@ -63,23 +114,23 @@ function Newcourse() {
           </div>
 
           <div className="form_group">
-            <label htmlFor="imgsrc">Image</label>
-            <input
-              type="text"
-              name="imgsrc"
-              id="imgsrc"
-              value={newCourse.imgsrc}
-              onChange={(e) => setNewCourse({ ...newCourse, [e.target.id]: e.target.value })}
-            />
-          </div>
-
-          <div className="form_group">
             <label htmlFor="title">Title</label>
             <input
               type="text"
               name="title"
               id="title"
               value={newCourse.title}
+              onChange={(e) => setNewCourse({ ...newCourse, [e.target.id]: e.target.value })}
+            />
+          </div>
+
+          <div className="form_group">
+            <label htmlFor="imgsrc">Image</label>
+            <input
+              type="text"
+              name="imgsrc"
+              id="imgsrc"
+              value={newCourse.imgsrc}
               onChange={(e) => setNewCourse({ ...newCourse, [e.target.id]: e.target.value })}
             />
           </div>
@@ -122,62 +173,70 @@ function Newcourse() {
         {
           (flag) ? (
             <Fragment>
-              <form onSubmit={(e) => handleQuizSubmit(e)}>
+              {/* Quiz Form */}
+              <form className='form quizForm' key={noOfQuiz} onSubmit={(e) => handleFinalSubmit(e)}>
                 <div className="form_group">
-                  <label htmlFor="question">Question</label>
-                  <input type="text" name="question" id="question" />
-                </div>
-                <div className="form_group">
-                  <label htmlFor="option_a">Option A</label>
+                  <label htmlFor="question">Question {noOfQuiz + 1}</label>
                   <input
                     type="text"
-                    name="option_a"
-                    id="option_a"
-                    value={newQuiz.option_a}
-                    onChange={(e) => setNewQuiz({ ...newCourse, [e.target.id]: e.target.value })}
+                    name="question"
+                    id="question"
+                    value={newQuiz.question}
+                    onChange={(e) => setNewQuiz({ ...newQuiz, [e.target.id]: e.target.value })}
                   />
                 </div>
                 <div className="form_group">
-                  <label htmlFor="option_b">Option B</label>
+                  <label htmlFor="choiceA">Option A</label>
                   <input
                     type="text"
-                    name="option_b"
-                    id="option_b"
-                    value={newQuiz.option_b}
-                    onChange={(e) => setNewQuiz({ ...newCourse, [e.target.id]: e.target.value })}
+                    name="choiceA"
+                    id="choiceA"
+                    value={newQuiz.choiceA}
+                    onChange={(e) => setNewQuiz({ ...newQuiz, [e.target.id]: e.target.value })}
                   />
                 </div>
                 <div className="form_group">
-                  <label htmlFor="option_c">Option C</label>
+                  <label htmlFor="choiceB">Option B</label>
                   <input
                     type="text"
-                    name="option_c"
-                    id="option_c"
-                    value={newQuiz.option_c}
-                    onChange={(e) => setNewQuiz({ ...newCourse, [e.target.id]: e.target.value })}
+                    name="choiceB"
+                    id="choiceB"
+                    value={newQuiz.choiceB}
+                    onChange={(e) => setNewQuiz({ ...newQuiz, [e.target.id]: e.target.value })}
                   />
                 </div>
                 <div className="form_group">
-                  <label htmlFor="option_d">Option D</label>
+                  <label htmlFor="choiceC">Option C</label>
                   <input
                     type="text"
-                    name="option_d"
-                    id="option_d"
-                    value={newQuiz.option_d}
-                    onChange={(e) => setNewQuiz({ ...newCourse, [e.target.id]: e.target.value })}
+                    name="choiceC"
+                    id="choiceC"
+                    value={newQuiz.choiceC}
+                    onChange={(e) => setNewQuiz({ ...newQuiz, [e.target.id]: e.target.value })}
                   />
                 </div>
                 <div className="form_group">
-                  <label htmlFor="answer">Answer Choice</label>
+                  <label htmlFor="choiceD">Option D</label>
                   <input
                     type="text"
-                    name="answer"
-                    id="answer"
-                    value={newQuiz.answer}
-                    onChange={(e) => setNewQuiz({ ...newCourse, [e.target.id]: e.target.value })}
+                    name="choiceD"
+                    id="choiceD"
+                    value={newQuiz.choiceD}
+                    onChange={(e) => setNewQuiz({ ...newQuiz, [e.target.id]: e.target.value })}
                   />
                 </div>
-                <input type="submit" value="New Quiz" onClick={(e) => handleQuizSubmit(e)} />
+                <div className="form_group">
+                  <label htmlFor="correctAns">Answer</label>
+                  <input
+                    type="text"
+                    name="correctAns"
+                    id="correctAns"
+                    value={newQuiz.correctAns}
+                    onChange={(e) => setNewQuiz({ ...newQuiz, [e.target.id]: e.target.value })}
+                  />
+                </div>
+                <button onClick={(e) => handleAQuiz(e)} className='btn'>Add Quiz</button>
+                <input type="submit" value="Create Course" onClick={(e) => handleFinalSubmit(e)} />
               </form>
             </Fragment>
           ) : null

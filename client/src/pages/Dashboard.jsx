@@ -43,7 +43,7 @@ function Dashboard() {
         )}
 
         {/* Login Form */}
-        {!login && userName.trim() === "" && (
+        {!login && !userName && (
           <Fragment>
             <form className="login" onSubmit={handleSubmit}>
               <input
