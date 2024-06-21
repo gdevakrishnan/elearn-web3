@@ -8,7 +8,8 @@ function Navbar() {
         State
     } = useContext(appContext);
     const {
-        WalletAddress
+        WalletAddress,
+        isAdmin
     } = State;
 
     return (
@@ -26,23 +27,27 @@ function Navbar() {
                                 Courses
                             </Link>
                         </li>
-                        <li title='New Course'>
-                            <Link to={'/new-course'}>
-                                New Course
-                            </Link>
-                        </li>
+                        {
+                            isAdmin && (
+                                <li title='New Course'>
+                                    <Link to={'/new-course'}>
+                                        New Course
+                                    </Link>
+                                </li>
+                            )
+                        }
                         {(WalletAddress) ?
                             (<li title={WalletAddress}>
                                 <Link>
                                     {WalletAddress.slice(0, 6)}...
                                 </Link>
                             </li>) :
-                        (<li title='New Course'>
-                            <button onClick={(e) => {
-                                e.preventDefault();
-                                getStateParameters();
-                            }}>Connect</button>
-                        </li>)}
+                            (<li title='New Course'>
+                                <button onClick={(e) => {
+                                    e.preventDefault();
+                                    getStateParameters();
+                                }}>Connect</button>
+                            </li>)}
                     </ul>
                 </nav>
             </header>

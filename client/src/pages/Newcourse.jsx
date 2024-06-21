@@ -88,6 +88,7 @@ function Newcourse() {
       // Success message
       alert("quiz list added successfully");
       setNewCourse(initialState);
+      setFlag(false);
 
     } catch (error) {
       // Error handling
