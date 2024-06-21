@@ -44,6 +44,18 @@ function Newcourse() {
       }
     }
 
+    // Call quizCreate transaction
+    const tx1 = await WriteContract.getCourse(
+      newCourse.id,
+      newCourse.imgsrc,
+      newCourse.title,
+      newCourse.descrip,
+      newCourse.videourl,
+      newCourse.price,
+      { from: WalletAddress }
+    );
+    await tx1.wait();
+    alert("Course added successfully");
     setFlag(true);
   }
 
@@ -65,28 +77,16 @@ function Newcourse() {
     e.preventDefault();
 
     try {
-      // Call quizCreate transaction
-      const tx1 = await WriteContract.getCourse(
-        newCourse.id,
-        newCourse.imgsrc,
-        newCourse.title,
-        newCourse.descrip,
-        newCourse.videourl,
-        newCourse.price,
-        { from: WalletAddress }
-      );
-      await tx1.wait();
-
       const tx2 = await WriteContract.quizCreate(
         newCourse.id,
         noOfQuiz,
         quiz,
-        {from: WalletAddress}
+        { from: WalletAddress }
       );
       await tx2.wait();
 
       // Success message
-      alert("Course and quiz list added successfully");
+      alert("quiz list added successfully");
       setNewCourse(initialState);
 
     } catch (error) {

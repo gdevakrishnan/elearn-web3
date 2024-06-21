@@ -12,11 +12,8 @@ function Dashboard() {
     e.preventDefault();
     if (uname.trim() !== '') {
       try {
-        console.log('uname: ', uname);
         const tx = await WriteContract.registerNewUser(uname, { from: WalletAddress })
         tx.wait;
-
-        console.log("tx: ", tx);
       } catch (e) {
         console.log(e.message);
       }
