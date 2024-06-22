@@ -15,6 +15,8 @@ function Courses() {
   const [courses, setCourses] = useState(null);
   const [viewCourse, setViewCourse] = useState(null);
   const [isPurchased, setIsPurchased] = useState(false);
+  const [quizzes, setQuizzes] = useState(null);
+  const [quizAnswers, setQuizAnswers] = useState({});
 
   // Get all courses
   const getCourses = async () => {
@@ -49,8 +51,9 @@ function Courses() {
   }
 
   // To get quizzes of the course
-  const handleGetQuizzes = (aCourse) => {
-    console.log(aCourse);
+  const handleGetQuizzes = async (aCourse) => {
+    const quizList = await ReadContract.getQuiz(aCourse[0].toString(), { from: WalletAddress });
+    setQuizzes(quizList);
   }
 
   // Card Component
@@ -73,53 +76,134 @@ function Courses() {
     );
   }
 
+  // View detail of course
+  const ViewCourse = () => {
+    return (
+      <Fragment>
+        <div className="course_details" key={viewCourse[0].toString()}>
+          <div className="buttons">
+            <button className="btn" title="close" onClick={(e) => {
+              e.preventDefault();
+              setViewCourse(null);
+              setIsPurchased(false);
+              setQuizAnswers({});
+              setQuizzes(null);
+            }}>X</button>
+          </div>
+          <div className="main">
+            <div className="left">
+              <div className="image">
+                <img src={viewCourse[1]} alt={viewCourse[2]} className="img" />
+              </div>
+            </div>
+            <div className="right">
+              <h1 className="title">{viewCourse[2]}</h1>
+              <p className="description">{viewCourse[3]}</p>
+              <p className="price">Fee: {viewCourse[5].toString()} ETH</p>
+              {
+                (isPurchased) ? (
+                  <Fragment>
+                    {/* To watch course video */}
+                    <a href={viewCourse[4]} className="course_btn" title='watch course' target='_blank'>Watch</a>
+                    {/* To attend the quiz */}
+                    <button className="course_btn" onClick={() => handleGetQuizzes(viewCourse)} title='quiz'>Quiz</button>
+                  </Fragment>
+                ) : (
+                  // To purchase the course
+                  <button className="course_btn" onClick={() => handlePurchaseCourse(viewCourse)} title='enroll'>Enroll</button>
+                )
+              }
+            </div>
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
+
+  // Attempt Quiz
+  const Quiz = () => {
+    return (
+      <Fragment>
+        <form className='form quiz_form'>
+          {
+            quizzes.map((aQuiz, index) => {
+              return (
+                <Fragment>
+                  <div className="form_group">
+                    <h1 className='title'>{index + 1}. {aQuiz[0]}</h1>
+                    <div className="choice">
+                      <input
+                        type="radio"
+                        name={`question_${index + 1}`}
+                        id={`question_${index + 1}_${aQuiz[1]}`}
+                        value={aQuiz[1]}
+                        onChange={(e) => setQuizAnswers({ ...quizAnswers, [e.target.name]: e.target.value })}
+                        checked={quizAnswers[`question_${index + 1}`] === aQuiz[1]}
+                      />
+                      <label htmlFor={`question_${index + 1}_${aQuiz[1]}`}>{aQuiz[1]}</label>
+                    </div>
+
+                    <div className="choice">
+                      <input
+                        type="radio"
+                        name={`question_${index + 1}`}
+                        id={`question_${index + 1}_${aQuiz[2]}`}
+                        value={aQuiz[2]}
+                        onChange={(e) => setQuizAnswers({ ...quizAnswers, [e.target.name]: e.target.value })}
+                        checked={quizAnswers[`question_${index + 1}`] === aQuiz[2]}
+                      />
+                      <label htmlFor={`question_${index + 1}_${aQuiz[2]}`}>{aQuiz[2]}</label>
+                    </div>
+
+                    <div className="choice">
+                      <input
+                        type="radio"
+                        name={`question_${index + 1}`}
+                        id={`question_${index + 1}_${aQuiz[3]}`}
+                        value={aQuiz[3]}
+                        onChange={(e) => setQuizAnswers({ ...quizAnswers, [e.target.name]: e.target.value })}
+                        checked={quizAnswers[`question_${index + 1}`] === aQuiz[3]}
+                      />
+                      <label htmlFor={`question_${index + 1}_${aQuiz[3]}`}>{aQuiz[3]}</label>
+                    </div>
+
+                    <div className="choice">
+                      <input
+                        type="radio"
+                        name={`question_${index + 1}`}
+                        id={`question_${index + 1}_${aQuiz[4]}`}
+                        value={aQuiz[4]}
+                        onChange={(e) => setQuizAnswers({ ...quizAnswers, [e.target.name]: e.target.value })}
+                        checked={quizAnswers[`question_${index + 1}`] === aQuiz[4]}
+                      />
+                      <label htmlFor={`question_${index + 1}_${aQuiz[4]}`}>{aQuiz[4]}</label>
+                    </div>
+                  </div>
+                </Fragment>
+              );
+            })
+          }
+          <input type="submit" value="Submit" className='quiz_btn' />
+        </form>
+      </Fragment>
+    );
+  }
+
   return (
     <Fragment>
       <section className="page course_page">
         {
           // View Course
           (viewCourse) ? (
-            <div className="course_details" key={viewCourse[0].toString()}>
-              <div className="buttons">
-                <button className="btn" title="close" onClick={(e) => {
-                  e.preventDefault();
-                  setViewCourse(null);
-                  setIsPurchased(false);
-                }}>X</button>
-              </div>
-              <div className="main">
-                <div className="left">
-                  <div className="image">
-                    <img src={viewCourse[1]} alt={viewCourse[2]} className="img" />
-                  </div>
-                </div>
-                <div className="right">
-                  <h1 className="title">{viewCourse[2]}</h1>
-                  <p className="description">{viewCourse[3]}</p>
-                  <p className="price">Fee: {viewCourse[5].toString()} ETH</p>
-                  {
-                    (isPurchased) ? (
-                      <Fragment>
-                        {/* To watch course video */}
-                        <a href={viewCourse[4]} className="course_btn" title='watch course' target='_blank'>Watch</a>
-                        {/* To attend the quiz */}
-                        <button className="course_btn" onClick={() => handleGetQuizzes(viewCourse)} title='quiz'>Quiz</button>
-                      </Fragment>
-                    ) : (
-                      // To purchase the course
-                      <button className="course_btn" onClick={() => handlePurchaseCourse(viewCourse)} title='enroll'>Enroll</button>
-                    )
-                  }
-                </div>
-              </div>
-            </div>
+            <Fragment>
+              <ViewCourse />
+              {quizzes && <Quiz />}
+            </Fragment>
           ) : null
         }
         {/* Course Card */}
         <div className="cards">
-          {
-            courses && !viewCourse && <Card />
-          }
+          {courses && !viewCourse && <Card />}
         </div>
       </section>
     </Fragment >

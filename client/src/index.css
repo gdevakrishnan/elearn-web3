@@ -221,7 +221,8 @@ form {
 }
 
 .card .view_course,
-.course_details .course_btn {
+.course_details .course_btn,
+.quiz_form .quiz_btn {
   display: inline-block;
   padding: 8px 12px;
   background-color: #007bff;
@@ -236,7 +237,8 @@ form {
 }
 
 .card .view_course:hover,
-.course_details .course_btn:hover {
+.course_details .course_btn:hover,
+.quiz_form .quiz_btn:hover {
   background-color: #0056b3; /* Darker shade of blue on hover */
 }
 
@@ -318,6 +320,77 @@ form {
     padding: 0;
     margin-top: 20px;
   }
+}
+
+/* Quiz Form */
+.quiz_form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.quiz_form .title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.quiz_form .form_group {
+  margin-bottom: 20px;
+}
+
+.quiz_form .form_group .choice {
+  margin-bottom: 5px;
+}
+
+.quiz_form .choice label {
+  display: block;
+  margin-left: 30px;
+  font-weight: normal;
+  cursor: pointer;
+  color: #ddd;
+}
+
+.quiz_form .choice input[type="radio"] {
+  display: none;
+}
+
+.quiz_form .choice label::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border: 2px solid #555;
+  border-radius: 50%;
+  background-color: #444;
+  vertical-align: middle;
+}
+
+.quiz_form .choice input[type="radio"]:checked + label::before {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.quiz_form .choice label:hover::before {
+  background-color: #555;
+}
+
+.quiz_form .quiz_btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.quiz_form .quiz_btn:hover {
+  background-color: #0056b3;
 }
 
 
