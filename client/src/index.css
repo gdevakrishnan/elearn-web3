@@ -220,24 +220,105 @@ form {
   margin-bottom: 15px;
 }
 
-.card .view_course {
+.card .view_course,
+.course_details .get_course {
   display: inline-block;
   padding: 8px 12px;
   background-color: #007bff;
   color: #fff;
+  outline: none;
+  border: none;
   text-decoration: none;
   border-radius: 5px;
+}
+
+.card .view_course:hover,
+.course_details .get_course:hover {
+  background-color: #0056b3; /* Darker shade of blue on hover */
+}
+
+/* view course */
+.course_details {
+  background-color: #fff; /* Light background */
+  color: #333; /* Dark text */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 80%;
+  margin: 0px auto;
+}
+
+.course_details {
+  background-color: #333; /* Dark background */
+  color: #fff; /* Light text */
+  margin-bottom: 20px;
+}
+
+.course_details .buttons {
+  text-align: right;
   margin-bottom: 10px;
 }
 
-.card .view_course:hover {
-  background-color: #0056b3; /* Darker shade of blue on hover */
+.course_details .main {
+  display: flex;
+}
+
+.course_details .main .left {
+  flex: 1;
+  text-align: center;
+}
+
+.course_details .main .left .image img {
+  max-width: 70%;
+  border-radius: 8px;
+}
+
+.course_details .main .right {
+  flex: 2;
+  padding: 0 20px;
+}
+
+.course_details .title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.course_details .description {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.course_details .price {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.course_details .buttons .btn {
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #ddd;
+}
+
+@media (max-width: 768px) {
+  .course_details, .course_details .main {
+    display: flex;
+    flex-direction: column;
+  }
+  .course_details .main .right {
+    padding: 0;
+    margin-top: 20px;
+  }
 }
 
 
 /* Leader Board */
-/* leaderBoard.css (or any appropriate CSS file) */
-
 .leaderPage {
   width: 100%;
   color: #fff; /* Light text color for contrast */
