@@ -27,7 +27,7 @@ function Courses() {
       courses && courses.map((aCourse, index) => {
         return (
           <Fragment>
-            <div className="card" key={aCourse[0].toString()}>
+            <div className="card" key={aCourse[0].toString()} title={aCourse[2]}>
               <div className="image">
                 <img src={aCourse[1]} alt={aCourse[2]} className="img" />
               </div>

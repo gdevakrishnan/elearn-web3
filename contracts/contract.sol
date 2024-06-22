@@ -201,6 +201,24 @@ contract Contract {
         }
         return answers;
     }
+
+    // Function to get quiz questions for a course
+    function getQuiz(uint _courseId) public view returns (Quiz[] memory) {
+        uint quizIdForCourse = courseQuizRecord[_courseId];
+        return quizRecord[quizIdForCourse];
+    }
+
+    // Get leader Board
+    function getLeaderboard() public view returns (Users[] memory) {
+        Users[] memory leaderboard = new Users[](usersAddress.length);
+        
+        for (uint i = 0; i < usersAddress.length; i++) {
+            address userAddress = usersAddress[i];
+            leaderboard[i] = usersRecord[userAddress];
+        }
+        
+        return leaderboard;
+    }
 }
 
 // Deployed Contract Address: 0xaAE04Cd5c6ed58B1448C359F78f6AF9A3A117812

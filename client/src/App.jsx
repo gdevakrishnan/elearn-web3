@@ -13,8 +13,9 @@ function App() {
 
   const initialState = {
     WindowEthereum: false,
-    // ContractAddress: "0xaAE04Cd5c6ed58B1448C359F78f6AF9A3A117812",
-    ContractAddress: "0x410d2d92ACb49588c5465cAe149999d438d76f24",
+    // ContractAddress: "0xaAE04Cd5c6ed58B1448C359F78f6AF9A3A117812", // Original
+    // ContractAddress: "0x410d2d92ACb49588c5465cAe149999d438d76f24",  // own
+    ContractAddress: "0xF4D1112E84854d4253D73158D4Db14C87a903C5D", // Updated contract
     WalletAddress: null,
     ContractAbi: ABI.abi,
     Provider: null,

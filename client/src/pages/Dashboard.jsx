@@ -1,9 +1,18 @@
 import React, { Fragment, useContext, useState } from 'react';
 import appContext from '../context/appContext';
+import LeaderBoard from '../components/LeaderBoard'
 
 function Dashboard() {
-  const { State } = useContext(appContext);
-  const { isLogin, userName, WriteContract, WalletAddress } = State;
+  const { 
+    State
+  } = useContext(appContext);
+  const {
+    isLogin,
+    userName,
+    ReadContract,
+    WriteContract,
+    WalletAddress
+  } = State;
 
   const [login, setLogin] = useState(!isLogin);
   const [uname, setUname] = useState('');
@@ -55,6 +64,7 @@ function Dashboard() {
             </form>
           </Fragment>
         )}
+        { userName && <LeaderBoard /> }
       </section>
     </Fragment>
   );
