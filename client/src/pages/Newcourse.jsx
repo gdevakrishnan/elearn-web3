@@ -38,7 +38,7 @@ function Newcourse() {
   const handleNewCourseSubmit = async (e) => {
     e.preventDefault();
     for (const key in newCourse) {
-      if (newCourse[key] === '' || newCourse[key] === 0) {
+      if (newCourse[key].trim() === '' || newCourse[key] === 0) {
         alert("Enter all the fields")
         return;
       }
@@ -62,7 +62,7 @@ function Newcourse() {
   const handleAQuiz = (e) => {
     e.preventDefault();
     for (const key in newQuiz) {
-      if (newQuiz[key] === '') {
+      if (newQuiz[key].trim() === '') {
         alert("Enter all the fields")
         return;
       }

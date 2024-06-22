@@ -56,6 +56,41 @@ function Courses() {
     setQuizzes(quizList);
   }
 
+  // To submit quiz and calculate score and update the score in contract
+  const handleQuizSubmit = async (e) => {
+    e.preventDefault();
+    let count = 0;
+    let score = 0;
+    for (const key in quizAnswers) {
+      count += 1;
+      if (quizAnswers[key].trim() === '') {
+        alert("Enter all the fields")
+        return;
+      }
+    }
+    
+    if (count == 0 || count < quizzes.length) {
+      alert("Enter all the fields")
+      return;
+    }
+
+    // Calculate score
+    for (let i = 0;i < quizzes.length;i++) {
+      if (quizzes[i][5] == quizAnswers[`question_${i + 1}`]) {
+        score++;
+      }
+    }
+
+    // Send score to the contract
+    const tx = await WriteContract.updateScore(score, { from: WalletAddress });
+    await tx.wait();
+    alert("Your score was updated")
+    setQuizAnswers({});
+    setQuizzes(null);
+    setIsPurchased(false);
+    setViewCourse(null);
+  }
+
   // Card Component
   const Card = () => {
     return (
@@ -120,7 +155,7 @@ function Courses() {
     );
   }
 
-  // Attempt Quiz
+  // Attempt Quiz Component
   const Quiz = () => {
     return (
       <Fragment>
@@ -183,12 +218,13 @@ function Courses() {
               );
             })
           }
-          <input type="submit" value="Submit" className='quiz_btn' />
+          <input type="submit" value="Submit" className='quiz_btn' onClick={(e) => handleQuizSubmit(e)}/>
         </form>
       </Fragment>
     );
   }
 
+  // Main Course Page
   return (
     <Fragment>
       <section className="page course_page">

@@ -11,6 +11,8 @@ body {
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
+  background-color: #222; /* Dark background */
+  color: #ddd; /* Light text color */
 }
 
 .page {
@@ -58,16 +60,15 @@ form {
 }
 
 /* New Course Page Styles */
-.new_course_page form{
+.new_course_page form {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   background-color: #333;
-  color: #fff;
+  color: #ddd; /* Light text color */
   border-radius: 8px;
   margin-top: 20px;
 }
-
 
 .new_course_page .form_group {
   margin-bottom: 15px;
@@ -77,7 +78,7 @@ form {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
-  color: #ddd; /* Lighter text color */
+  color: #ddd; /* Light text color */
 }
 
 .new_course_page input[type="number"],
@@ -87,8 +88,8 @@ form {
   font-size: 14px;
   border: 1px solid #555; /* Darker border color */
   border-radius: 4px;
-  background-color: #444; /* Darker background color */
-  color: #ddd; /* Lighter text color */
+  background-color: #444; /* Darker background */
+  color: #ddd; /* Light text color */
 }
 
 .new_course_page input[type="submit"],
@@ -119,10 +120,8 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   text-align: center;
-  background-color: #222; /* Dark background */
-  color: #ddd; /* Lighter text color */
 }
 
 .dashboard_page .login_btn {
@@ -165,13 +164,13 @@ form {
   border: 1px solid #555; /* Darker border color */
   border-radius: 3px;
   background-color: #333; /* Darker background */
-  color: #ddd; /* Lighter text color */
+  color: #ddd; /* Light text color */
 }
 
 .login input[type="submit"] {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #4CAF50; /* Green color */
   color: white;
   border: none;
   border-radius: 3px;
@@ -179,7 +178,7 @@ form {
 }
 
 .login input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #45a049; /* Darker shade of green */
 }
 
 /* Courses */
@@ -197,7 +196,7 @@ form {
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Darker box shadow */
   background-color: #444; /* Darker background */
-  color: #ddd; /* Lighter text color */
+  color: #ddd; /* Light text color */
 }
 
 .card .image {
@@ -225,7 +224,7 @@ form {
 .quiz_form .quiz_btn {
   display: inline-block;
   padding: 8px 12px;
-  background-color: #007bff;
+  background-color: #007bff; /* Blue color */
   color: #fff;
   outline: none;
   border: none;
@@ -242,22 +241,15 @@ form {
   background-color: #0056b3; /* Darker shade of blue on hover */
 }
 
-/* view course */
-.course_details {
-  background-color: #fff; /* Light background */
-  color: #333; /* Dark text */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  width: 80%;
-  margin: 0px auto;
-}
-
+/* View Course */
 .course_details {
   background-color: #333; /* Dark background */
   color: #fff; /* Light text */
-  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 80%;
 }
 
 .course_details .buttons {
@@ -312,23 +304,27 @@ form {
 }
 
 @media (max-width: 768px) {
-  .course_details, .course_details .main {
-    display: flex;
+  .course_details,
+  .course_details .main {
     flex-direction: column;
   }
   .course_details .main .right {
     padding: 0;
     margin-top: 20px;
   }
+
+  .quiz_form {
+    width: 90%;
+  }
 }
 
 /* Quiz Form */
 .quiz_form {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 80%;
+  margin: 0 auto 20px;
   padding: 20px;
   background-color: #333;
-  color: #fff;
+  color: #ddd; /* Light text color */
   border-radius: 8px;
   margin-top: 20px;
 }
@@ -351,7 +347,7 @@ form {
   margin-left: 30px;
   font-weight: normal;
   cursor: pointer;
-  color: #ddd;
+  color: #ddd; /* Light text color */
 }
 
 .quiz_form .choice input[type="radio"] {
@@ -364,24 +360,24 @@ form {
   width: 10px;
   height: 10px;
   margin-right: 10px;
-  border: 2px solid #555;
+  border: 2px solid #555; /* Darker border color */
   border-radius: 50%;
-  background-color: #444;
+  background-color: #444; /* Darker background */
   vertical-align: middle;
 }
 
 .quiz_form .choice input[type="radio"]:checked + label::before {
-  background-color: #007bff;
+  background-color: #007bff; /* Blue color */
   border-color: #007bff;
 }
 
 .quiz_form .choice label:hover::before {
-  background-color: #555;
+  background-color: #555; /* Darker shade on hover */
 }
 
 .quiz_form .quiz_btn {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #007bff; /* Blue color */
   color: #fff;
   border: none;
   cursor: pointer;
@@ -390,23 +386,23 @@ form {
 }
 
 .quiz_form .quiz_btn:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker shade of blue on hover */
 }
-
 
 /* Leader Board */
 .leaderPage {
-  width: 100%;
+  width: 80%;
   color: #fff; /* Light text color for contrast */
   padding: 20px;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #222; /* Dark background */
 }
 
 .leaderPage table {
-  width: 50%;
+  width: 100%;
   border-collapse: collapse;
   border: 1px solid #ddd;
 }
@@ -429,4 +425,3 @@ form {
 .leaderPage table tbody tr:hover {
   background-color: #444; /* Hover color */
 }
-
