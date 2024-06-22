@@ -164,7 +164,7 @@ function Courses() {
             quizzes.map((aQuiz, index) => {
               return (
                 <Fragment>
-                  <div className="form_group">
+                  <div className="form_group" key={index}>
                     <h1 className='title'>{index + 1}. {aQuiz[0]}</h1>
                     <div className="choice">
                       <input

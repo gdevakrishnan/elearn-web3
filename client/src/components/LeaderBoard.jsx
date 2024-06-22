@@ -40,7 +40,7 @@ function LeaderBoard() {
                     leaderBoard.map((user, index) => {
                       return (
                         <Fragment>
-                          <tr>
+                          <tr key={index}>
                             <td>{user[0]}</td>
                             <td>{user[1].toString()}</td>
                           </tr>
