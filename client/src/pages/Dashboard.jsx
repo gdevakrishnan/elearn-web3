@@ -5,12 +5,11 @@ import ImageCarousel from '../components/ImageCarousel';
 
 function Dashboard() {
   const { 
-    State
+    State,
   } = useContext(appContext);
   const {
     isLogin,
     userName,
-    ReadContract,
     WriteContract,
     WalletAddress
   } = State;
@@ -65,7 +64,7 @@ function Dashboard() {
             </form>
           </Fragment>
         )}
-        { userName && <ImageCarousel /> }
+        <ImageCarousel />
         { userName && <LeaderBoard /> }
       </section>
     </Fragment>

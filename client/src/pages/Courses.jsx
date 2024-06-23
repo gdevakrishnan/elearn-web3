@@ -3,7 +3,9 @@ import appContext from '../context/appContext';
 
 function Courses() {
   const {
-    State
+    State,
+    setMsg,
+    setErrorMsg
   } = useContext(appContext);
 
   const {
@@ -46,7 +48,7 @@ function Courses() {
     // To buy the course
     const tx = await WriteContract.addPurchasedCourse(aCourse[0].toString(), { from: WalletAddress });
     await tx.wait();
-    alert("Course purchased successfully");
+    setMsg("Course purchased successfully");
     checkCoursePurchased(aCourse);
   }
 
@@ -64,13 +66,13 @@ function Courses() {
     for (const key in quizAnswers) {
       count += 1;
       if (quizAnswers[key].trim() === '') {
-        alert("Enter all the fields")
+        setErrorMsg("Enter all the fields")
         return;
       }
     }
     
     if (count == 0 || count < quizzes.length) {
-      alert("Enter all the fields")
+      setErrorMsg("Enter all the fields")
       return;
     }
 
@@ -84,7 +86,7 @@ function Courses() {
     // Send score to the contract
     const tx = await WriteContract.updateScore(score, { from: WalletAddress });
     await tx.wait();
-    alert("Your score was updated")
+    setMsg("Your score was updated")
     setQuizAnswers({});
     setQuizzes(null);
     setIsPurchased(false);

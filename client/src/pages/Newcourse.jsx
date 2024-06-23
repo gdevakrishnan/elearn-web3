@@ -21,7 +21,9 @@ function Newcourse() {
   }
 
   const {
-    State
+    State,
+    setErrorMsg,
+    setMsg
   } = useContext(appContext);
 
   const {
@@ -39,7 +41,7 @@ function Newcourse() {
     e.preventDefault();
     for (const key in newCourse) {
       if (newCourse[key].trim() === '' || newCourse[key] === 0) {
-        alert("Enter all the fields")
+        setErrorMsg("Enter all the fields")
         return;
       }
     }
@@ -55,7 +57,7 @@ function Newcourse() {
       { from: WalletAddress }
     );
     await tx1.wait();
-    alert("Course added successfully");
+    setMsg("Course added successfully");
     setFlag(true);
   }
 
@@ -63,7 +65,7 @@ function Newcourse() {
     e.preventDefault();
     for (const key in newQuiz) {
       if (newQuiz[key].trim() === '') {
-        alert("Enter all the fields")
+        setErrorMsg("Enter all the fields")
         return;
       }
     }
@@ -86,14 +88,14 @@ function Newcourse() {
       await tx2.wait();
 
       // Success message
-      alert("quiz list added successfully");
+      setMsg("quiz list added successfully");
       setNewCourse(initialState);
       setFlag(false);
 
     } catch (error) {
       // Error handling
       console.error("Error submitting transaction:", error);
-      alert("Error submitting transaction. Please try again.");
+      setErrorMsg("Error submitting transaction. Please try again.");
     }
   }
 
