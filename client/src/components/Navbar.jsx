@@ -28,7 +28,7 @@ function Navbar() {
                     <ul className={menuBtn ? "nav-menu active" : "nav-menu"}>
                         <li title='Dashboard'>
                             <Link to={'/'}>
-                                Dashboard
+                                Home
                             </Link>
                         </li>
                         <li title='Courses'>
