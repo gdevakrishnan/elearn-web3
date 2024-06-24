@@ -475,20 +475,21 @@ form {
 
 /* Leader Board */
 .leaderPage {
-  width: 80%;
+  width: 100%;
   color: #fff; /* Light text color for contrast */
   padding: 20px;
   border-radius: 8px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-color: #222; /* Dark background */
 }
 
 .leaderPage table {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
   border: 1px solid #ddd;
+  margin-top: 2rem;
 }
 
 .leaderPage table th,

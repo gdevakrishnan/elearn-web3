@@ -7,12 +7,14 @@ import Newcourse from '../pages/Newcourse'
 import appContext from '../context/appContext'
 import Profile from '../pages/Profile'
 import Footer from '../components/Footer'
+import LeaderBoard from '../pages/LeaderBoard'
 
 function Router() {
   const { State } = useContext(appContext);
   const {
     WalletAddress,
-    isAdmin
+    isAdmin,
+    userName
   } = State;
 
   return (
@@ -24,6 +26,7 @@ function Router() {
                 <Route path='/courses' element={(WalletAddress) ? <Courses /> : <Dashboard />}/>
                 <Route path='/new-course' element={(WalletAddress && isAdmin) ? <Newcourse /> : <Dashboard />}/>
                 <Route path='/profile' element={(WalletAddress) ? <Profile /> : <Dashboard />}/>
+                <Route path='/leaderboard' element={(WalletAddress && userName) ? <LeaderBoard /> : <Dashboard />}/>
             </Routes>
             <Outlet />
             <Footer />

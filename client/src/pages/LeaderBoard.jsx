@@ -23,7 +23,7 @@ function LeaderBoard() {
 
   return (
     <Fragment>
-      <section className="leaderPage">
+      <section className="leaderPage page">
         {
           leaderBoard && (
             <Fragment>

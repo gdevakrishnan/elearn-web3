@@ -1,6 +1,5 @@
 import React, { Fragment, useContext, useState } from 'react';
 import appContext from '../context/appContext';
-import LeaderBoard from '../components/LeaderBoard'
 import ImageCarousel from '../components/ImageCarousel';
 
 function Dashboard() {
@@ -65,7 +64,6 @@ function Dashboard() {
           </Fragment>
         )}
         <ImageCarousel />
-        { userName && <LeaderBoard /> }
       </section>
     </Fragment>
   );

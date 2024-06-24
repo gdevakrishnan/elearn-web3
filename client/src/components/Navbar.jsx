@@ -6,7 +6,7 @@ import { FaBarsStaggered } from "react-icons/fa6";
 
 function Navbar() {
     const { getStateParameters, State } = useContext(appContext);
-    const { WalletAddress, isAdmin } = State;
+    const { WalletAddress, isAdmin, userName } = State;
     const [menuBtn, setMenuBtn] = useState(false); // State for menu button toggle
 
     const toggleMenu = () => {
@@ -21,7 +21,7 @@ function Navbar() {
                     <input type="checkbox" id="check" checked={menuBtn} onChange={toggleMenu} />
                     <label htmlFor='check' className="checkbtn">
                         {
-                            menuBtn ? <GrClose className='menu_btn'/> : <FaBarsStaggered className='menu_btn' />
+                            menuBtn ? <GrClose className='menu_btn' /> : <FaBarsStaggered className='menu_btn' />
                         }
                     </label>
 
@@ -36,6 +36,15 @@ function Navbar() {
                                 Courses
                             </Link>
                         </li>
+                        {
+                            WalletAddress && userName && (
+                                <li title='leaderboard'>
+                                    <Link to={'/leaderboard'}>
+                                        Leaderboard
+                                    </Link>
+                                </li>
+                            )
+                        }
                         {isAdmin && (
                             <li title='New Course'>
                                 <Link to={'/new-course'}>
